@@ -1,0 +1,23 @@
+image: docker:19.03.12
+services:
+  - docker:19.03.12-dind
+
+variables:
+  DOCKER_TAG: registry.gitlab.com/riskiwah/blog-hugo-ci
+  DOCKER_DRIVER: overlay2
+  BIN_NAME: gingin
+
+stages:
+  - build
+
+go_build:
+  stage: build
+  image: golang:1.16
+  script:
+    - go mod download
+    - mkdir build
+    - GOOS=linux GOARCH=amd64 go build main.go -o build/$BINARY_NAME ./...
+  artifacts:
+    paths:
+      - "/build"
+    expire_in: 2 hour
