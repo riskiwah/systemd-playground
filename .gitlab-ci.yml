@@ -19,5 +19,5 @@ go_build:
     - GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o build/$BINARY_NAME ./...
   artifacts:
     paths:
-      - "/build"
+      - "build/"
     expire_in: 2 hour
