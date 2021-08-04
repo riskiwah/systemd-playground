@@ -1,0 +1,30 @@
+[Unit]
+Description=rollback %I
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+WorkingDirectory=/home/extr/
+EnvironmentFile=/etc/default/rollback@%i
+ExecStart=/bin/bash -c -l '/home/extr/${APPS}'
+
+# Security reason not yet RND
+
+#SystemCallArchitectures=native
+#LockPersonality=yes
+#MemoryDenyWriteExecute=yes
+#PrivateDevices=yes
+#PrivateUsers=yes
+#ProtectControlGroups=yes
+#ProtectHostname=yes
+#ProtectKernelLogs=yes
+#ProtectKernelModules=yes
+#ProtectKernelTunables=yes
+#RestrictNamespaces=yes
+#RestrictRealtime=yes
+#SystemCallFilter=~@privileged @resources
+#SystemCallFilter=@system-service
+
+[Install]
+WantedBy=multi-user.target
