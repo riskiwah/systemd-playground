@@ -11,20 +11,24 @@ ExecStart=/bin/bash -c -l '/home/extr/${APPS}'
 
 # Security reason not yet RND
 
-#SystemCallArchitectures=native
-#LockPersonality=yes
-#MemoryDenyWriteExecute=yes
-#PrivateDevices=yes
-#PrivateUsers=yes
-#ProtectControlGroups=yes
-#ProtectHostname=yes
-#ProtectKernelLogs=yes
-#ProtectKernelModules=yes
-#ProtectKernelTunables=yes
-#RestrictNamespaces=yes
-#RestrictRealtime=yes
-#SystemCallFilter=~@privileged @resources
-#SystemCallFilter=@system-service
+SystemCallArchitectures=native
+LockPersonality=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+MemoryDenyWriteExecute=yes
+PrivateNetwork=yes
+CapabilityBoundingSet=CAP_SYS_PTRACE 
+PrivateDevices=yes
+PrivateUsers=yes
+ProtectControlGroups=yes
+ProtectHostname=yes
+ProtectKernelLogs=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+SystemCallFilter=~@privileged @resources
+SystemCallFilter=@system-service
 
 [Install]
 WantedBy=multi-user.target
