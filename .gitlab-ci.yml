@@ -9,6 +9,7 @@ variables:
 
 stages:
   - build
+  - rollback
 
 go_build:
   stage: build
@@ -21,4 +22,13 @@ go_build:
     paths:
       - "build/"
     expire_in: 2 hour
+  when: manual
+
+include:
+  - "https://gitlab.com/riskiwah/systemd-rollback/-/raw/main/config/shared-rollback.yml"
+
+rollback:
+  stage: rollback
+  script:
+    - echo "let's rollback"
   when: manual
