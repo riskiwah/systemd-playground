@@ -1,6 +1,3 @@
-stages:
-  - rollback
-
 .revert: &revert
   tags:
    - my-super-runner-ha-ha-ha
