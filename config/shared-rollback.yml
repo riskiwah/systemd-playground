@@ -1,0 +1,35 @@
+stages:
+  - rollback
+
+.revert: &revert
+  tags:
+   - my-super-runner-ha-ha-ha
+  script:
+    - |
+      cd /opt/systemd-rollback/
+      # We can make OLD_BINARY and store it as trigger (?)
+      export OLD_BINARY = systemd-rollback-$(date +'%H%M%S-%d%m%Y')
+      sudo sed -i "s|systemd-rollback|$OLD_BINARY|g" rollback@rollback-dynamic
+      cat rollback@rollback-dynamic
+      sudo systemctl restart rollback@rollback-dynamic.service
+      systemctl status rollback@rollback-dynamic.service
+
+let-me-in:host1:
+  stage: rollback
+  tags:
+   - my-super-runner-ha-ha-ha
+  script:
+    - ssh extr@host1
+    - <<:*revert
+  when: manual
+
+let-me-in:host2:
+  stage: rollback
+  tags:
+   - my-super-runner-ha-ha-ha
+  script:
+    - ssh extr@host2
+    - <<:*revert
+  when: manual
+  
+

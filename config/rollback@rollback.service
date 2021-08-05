@@ -5,9 +5,9 @@ Description=rollback %I
 Type=simple
 Restart=always
 RestartSec=3
-WorkingDirectory=/home/extr/
-EnvironmentFile=/etc/default/rollback@%i
-ExecStart=/bin/bash -c -l '/home/extr/${APPS}'
+WorkingDirectory=/opt/systemd-rollback/
+EnvironmentFile=/opt/systemd-rollback/rollback@%i
+ExecStart=/bin/bash -c -l '/opt/systemd-rollback/${APPS}'
 
 # Security reason not yet RND
 

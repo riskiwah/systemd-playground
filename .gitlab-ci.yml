@@ -21,3 +21,4 @@ go_build:
     paths:
       - "build/"
     expire_in: 2 hour
+  when: manual
