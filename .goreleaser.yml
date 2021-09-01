@@ -1,0 +1,43 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    - go mod tidy
+    - go mod download
+    - go generate ./...
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+nfpms:
+  - maintainer: Paiji Keren <paijo@uhuy.com>
+    vendor: Maju Mundur Inc.
+    homepage: https://github.com/riskiwah
+    description: Our Super APPS!.
+    version_metadata: alphabeta
+    license: "WTFPL"
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - deb
+    contents:
+      - src: config/systemd-rollback.service
+        dst: /etc/systemd/system/systemd-rollback.service
+      - src: config/systemd-rollback.conf
+        dst: /etc/systemd-rollback.conf
+        type: config
+    scripts:
+      postinstall: config/postinstall.sh
+      preremove: config/preremove.sh
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
