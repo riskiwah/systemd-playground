@@ -1,5 +1,5 @@
-# This is an example .goreleaser.yml file with some sane defaults.
-# Make sure to check the documentation at http://goreleaser.com
+# env:
+#   - git_tag='{{ .Env.GIT_TAG }}'
 before:
   hooks:
     - go mod tidy
@@ -12,6 +12,8 @@ builds:
       - linux
     goarch:
       - amd64
+archives:
+  - name_template: "{{ .ProjectName }}-{{ .Env.GIT_TAG }}-{{ .Os }}-{{ .Arch }}"
 nfpms:
   - maintainer: Paiji Keren <paijo@uhuy.com>
     vendor: Maju Mundur Inc.
@@ -19,7 +21,7 @@ nfpms:
     description: Our Super APPS!.
     version_metadata: alphabeta
     license: "WTFPL"
-    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    file_name_template: "{{ .ProjectName }}-{{ .Env.GIT_TAG }}-{{ .Os }}-{{ .Arch }}"
     formats:
       - deb
     contents:
