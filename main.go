@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	mux := gin.Default()
@@ -8,6 +12,9 @@ func main() {
 		c.JSON(200, gin.H{
 			"message": "wkwkw, hello world! 😅",
 		})
+	})
+	mux.GET("/healthz", func(c *gin.Context) {
+		c.String(http.StatusOK, "it's fine")
 	})
 	mux.Run(":9999")
 }
