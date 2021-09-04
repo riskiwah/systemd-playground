@@ -27,6 +27,8 @@ nfpms:
     contents:
       - src: config/systemd-rollback.service
         dst: /etc/systemd/system/systemd-rollback.service
+      - src: config/systemd-rollback.socket
+        dst: /etc/systemd/system/systemd-rollback.socket
       - src: config/systemd-rollback.conf
         dst: /etc/systemd-rollback.conf
         type: config

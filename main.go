@@ -10,7 +10,7 @@ func main() {
 	mux := gin.Default()
 	mux.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "wkwkw, hello world! 😅",
+			"message": "hello world! another version",
 		})
 	})
 	mux.GET("/healthz", func(c *gin.Context) {

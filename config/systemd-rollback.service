@@ -1,17 +1,18 @@
 [Unit]
 Description=systemd-rollback
+Requires=network.target
 
 
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/systemd-rollback
+ExecReload=/bin/kill -SIGINT $MAINPID
 Restart=always
 
 # Security reason not yet RND
 
 SystemCallArchitectures=native
 LockPersonality=yes
-NoNewPrivileges=yes
 PrivateTmp=yes
 MemoryDenyWriteExecute=yes
 CapabilityBoundingSet=CAP_SYS_PTRACE 

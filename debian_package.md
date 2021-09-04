@@ -10,3 +10,6 @@ Debian Package
 - For building and releasing local do:
 
   `goreleaser --snapshot --skip-publish --rm-dist`
+
+
+- Make it autostart when first deploy
